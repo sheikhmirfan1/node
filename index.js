@@ -1,6 +1,8 @@
 import chalk from "chalk";
 import http from "http";
 import 'dotenv/config';
+import fs from "fs";
+import axios from "axios";
 
 console.log(chalk.blue("Hello Friends"));
 console.log(chalk.red("Paul"));
@@ -19,4 +21,27 @@ server.listen(port, host, () => {
 }
 );
 
+fs.writeFile('data.txt', 'Hello World ', 'utf-8', (err) => {
+  if (err) throw err;
+    console.log('The file has been saved!');
+}
+);
+fs.readFile('data.txt', 'utf-8', (err, data) => {
+  if (err) throw err;
+    console.log(data);
+}
+);
+
+
+axios.get('http://www.google.com')
+    .then((response) => {
+        fs.writeFile('google.html', response.data, 'utf-8', (err) => {
+        if (err) throw err;
+            console.log('The file has been saved!');
+        }
+        );
+    })
+    .catch((error) => {
+        console.log(error);
+    });
 
