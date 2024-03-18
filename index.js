@@ -33,15 +33,31 @@ fs.readFile('data.txt', 'utf-8', (err, data) => {
 );
 
 
-axios.get('http://www.google.com')
-    .then((response) => {
-        fs.writeFile('google.html', response.data, 'utf-8', (err) => {
-        if (err) throw err;
-            console.log('The file has been saved!');
-        }
-        );
-    })
-    .catch((error) => {
-        console.log(error);
+//  axios.get('http://www.google.com')
+//     .then((response) => {
+//         fs.writeFile('google.html', response.data, 'utf-8', (err) => {
+//         if (err) throw err;
+//             console.log('The file has been saved!');
+//         }
+//         );
+//     })
+//     .catch((error) => {
+//         console.log(error);
+//     });
+
+const fetchData = async () => {
+  try {
+    const response = await axios.get("http://www.google.com");
+    fs.writeFile("google.html", response.data, "utf-8",(err)=>{
+        if (err)throw err;
+        console.log("The file has been saved!");
     });
+    
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+fetchData();
+
 
